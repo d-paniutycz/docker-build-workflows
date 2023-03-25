@@ -2,7 +2,7 @@
 The purpose of this repository is to create automated build workflows for testing, publishing, and versioning Docker images on multiple architectures in a flexible manner that does not require additional configuration.
 
 ## Workflows
-The repository consists of two interrelated workflows that operate on entities named `SCOPE`. A `SCOPE` is a folder containing a Dockerfile[^1] at its base level. Nesting of `SCOPE` is allowed, but each entity is treated separately. The `SCOPE_NAME` is the relative path to the `SCOPE` excluding the `SCOPE_ROOT` value (by default: _src_).
+The repository consists of two interrelated workflows that operate on entities named `SCOPE`. A `SCOPE` is a folder containing a [Dockerfile](https://docs.docker.com/engine/reference/builder) at its base level. Nesting of `SCOPE` is allowed, but each entity is treated separately. The `SCOPE_NAME` is the relative path to the `SCOPE` excluding the `SCOPE_ROOT` value (by default: _src_).
 
 <details>
   <summary>Example of building paths</summary>
@@ -16,7 +16,7 @@ The repository consists of two interrelated workflows that operate on entities n
 </details>
 
 ### [Docker build test push](/.github/workflows/docker-build-test-push.yaml)
-This workflow is responsible for building a single image within the `SCOPE`. It is automatically triggered by the [On scope root changes](#on-scope-root-changes) workflow or can be manually started in actions, where each run can be further parameterized. The workflow consists of two independent jobs: `docker-build-test` tests the image build and `docker-build-push` publishes the built image to a registry[^2] (by default: _ghcr.io_).
+This workflow is responsible for building a single image within the `SCOPE`. It is automatically triggered by the [On scope root changes](#on-scope-root-changes) workflow or can be manually started in actions, where each run can be further parameterized. The workflow consists of two independent jobs: `docker-build-test` tests the image build and `docker-build-push` publishes the built image to a [registry](https://docs.docker.com/registry) (by default: _ghcr.io_).
 
 <details>
   <summary>Build jobs specification</summary>
@@ -46,7 +46,7 @@ This workflow triggers the [Docker build push test](#docker-build-test-push) bas
 </details>
 
 ## Usage
-1) Create your own repository based on this template[^3] and clone it to your computer.
+1) Create your own repository based on this [template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template) and clone it to your computer.
 2) Create a `SCOPE` in the `SCOPE_ROOT` and push it to the main or other branch with pull request.
 3) Check the actions, depending on the previous step, the published image should be in the packages.
 
@@ -57,7 +57,3 @@ This workflow triggers the [Docker build push test](#docker-build-test-push) bas
 - Changes in `SCOPE_ROOT` are detected using _git diff_. Therefore, force pushes that modify the history below the base commit can result in errors in detecting changes.
 
 </details>
-
-[^1]: [Dockerfile reference](https://docs.docker.com/engine/reference/builder/)
-[^2]: [Docker registry](https://docs.docker.com/registry/)
-[^3]: [Repository from a template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template)
