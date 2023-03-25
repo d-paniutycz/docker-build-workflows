@@ -24,7 +24,7 @@ This workflow is responsible for building a single image within the `SCOPE`. It 
 |             event             |      job name       | from cache | push to registry |        architectures        |            tags             |
 |:-----------------------------:|:-------------------:|:----------:|:----------------:|:---------------------------:|:---------------------------:|
 | pull_request<br/>push (≠main) | `docker-build-test` |     ✓      |        -         |         linux/amd64         | latest<br/>(image URI test) |
-|         push (=main)          | `docker-build-push` |     -      |        ✓         | linux/amd64<br/>linux/arm64 |       latest<br/>1.x        |
+|         push (=main)          | `docker-build-push` |     ✓      |        ✓         | linux/amd64<br/>linux/arm64 |       latest<br/>1.x        |
 
 </details>
 
